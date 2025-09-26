@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- links -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+    <div class="min-h-screen p-4  flex items-center justify-center">
+        <div class="container max-w-screen-lg mx-auto">
+            <div>
+                <h2 class="font-semibold p-4 text-xl text-gray-600">Data Table</h2>
+                <table class="min-w-full divide-y divide-gray-200 overflow-x-auto rounded-md shadow-lg">
+                    <thead class="bg-blue-200 border ">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Name
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Contact No
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Email
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                City
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-blue-50 divide-y divide-gray-200" id="userTableBody">
+                        <!-- <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <img class="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150?img=1"
+                                            alt="">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            Jane Cooper
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">02345</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                jane.cooper@example.com
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Admin
+                            </td>
+
+                            <td class="px-6 py-4 whitespace-nowrap  text-sm font-medium">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                <a href="#" class="ml-2 text-red-600 hover:text-red-900">Delete</a>
+                            </td>
+                        </tr> -->
+
+                    </tbody>
+                </table>
+                <div class="fixed right-[5%] bottom-[5%]">
+                    <button type="submit" onclick="toForm()"
+                        class="flex  justify-center border-2 border-gray-500  gap-2 items-center mx-auto shadow-xl text-lg bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-indigo-600 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden rounded-full group">
+                        Add New
+                        <svg class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
+                            viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                                class="fill-gray-800 group-hover:fill-gray-800"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- popup Dialog -->
+    <div id="customDialog" class="fixed inset-0 hidden items-center justify-center bg-black/50 z-50">
+        <div class="bg-white p-6 rounded shadow-lg w-92">
+            <div class="lg:col-span-2">
+                <form id="myForm">
+                    <div class="text-gray-600">
+                        <p class="font-medium text-lg">Edit Details</p>
+                        <p id="result" class="text-red-500"></p>
+                    </div>
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+
+                        <div class="md:col-span-5">
+                            <label for="full_name">Full Name</label>
+                            <input type="text" name="full_name" id="full_name"
+                                class="h-10 border  mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                            <p id="full_name_result" class="text-red-500"></p>
+                        </div>
+
+                        <div class="md:col-span-5">
+                            <label for="email">Email Address</label>
+                            <input type="email" name="email" id="email"
+                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                placeholder="email@domain.com" />
+                            <p id="email_result" class="text-red-500"></p>
+                        </div>
+
+                        <div class="md:col-span-3">
+                            <label for="phoneNo">Mobile Number</label>
+                            <input type="tel" name="phoneNo" id="phoneNo"
+                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
+                            <p id="phoneNo_result" class="text-red-500"></p>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="city">City</label>
+                            <input type="text" name="city" id="city"
+                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
+                            <p id="city_result" class="text-red-500"></p>
+                        </div>
+                        <div class="md:col-span-5 text-right">
+                            <div class="flex justify-end gap-2">
+                                <button id="dialogCancel"
+                                    class="bg-gray-300 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">Cancel</button>
+                                <button id="dialogOk" onclick="btnOk()"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">OK</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="/src/js/dataTable.js"></script>
+</body>
+
+</html>
